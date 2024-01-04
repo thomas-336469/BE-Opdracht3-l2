@@ -3,14 +3,6 @@
 
 <head>
     <title>Instructeurs</title>
-    <!-- Include FontAwesome CSS (you can include this in your project) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .toggle-icon {
-            cursor: pointer;
-        }
-    </style>
-</head>
 
 <body>
     <h1>Instructeurs</h1>
@@ -49,19 +41,22 @@
             </td>
             <td>{{ $instructeur->opmerkingen }}</td>
             <td>
-                <!-- Edit Button -->
                 <a href="{{ route('instructeurs.edit', $instructeur->id) }}">Edit</a>
 
-                <!-- Delete Button -->
+
                 <form method="POST" action="{{ route('instructeurs.destroy', $instructeur->id) }}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this instructeur?')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </form>
+
             </td>
         </tr>
         @endforeach
     </table>
+    <script src="https://kit.fontawesome.com/c21a6ebb15.js" crossorigin="anonymous"></script>
 
     <script>
         function toggleStatus(instructeurId, currentStatus) {
@@ -79,12 +74,22 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Update the icon and text on success
                     const iconElement = document.querySelector(`#icon-${instructeurId}`);
                     const textElement = document.querySelector(`#text-${instructeurId}`);
 
                     iconElement.className = data.is_actief ? 'far fa-thumbs-up' : 'far fa-thumbs-down';
                     textElement.textContent = data.is_actief ? 'Yes' : 'No';
+
+                    // Check if the operation was successful and show a popup
+                    if (data.success) {
+                        alert(data.message);
+                        // Redirect to instructeur page after 3 seconds
+                        setTimeout(() => {
+                            window.location.replace("{{ route('instructeurs') }}");
+                        }, 3000);
+                    } else {
+                        console.error('Error:', data.message);
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);

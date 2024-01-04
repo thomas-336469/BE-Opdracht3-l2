@@ -20,15 +20,13 @@ class InstructeurController extends Controller
     public function destroy(Instructeur $instructeur)
     {
         if ($instructeur->is_actief == 0) {
-            return redirect()->route('instructeurs')
-                ->with('error', 'Instructeur is niet actief, kan niet verwijderd worden');
+            return response()->json(['success' => false, 'message' => 'Instructeur is niet actief, kan niet verwijderd worden']);
         } else {
             $instructeur->delete();
-
-            return redirect()->route('instructeurs')
-                ->with('success', 'Instructeur deleted successfully');
+            return response()->json(['success' => true, 'message' => 'Instructeur deleted successfully']);
         }
     }
+
     public function update(Instructeur $instructeur, Request $request)
     {
         $request->validate([
