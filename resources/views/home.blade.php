@@ -20,7 +20,7 @@
             <a href="{{route('overzicht-examens')}}">Examen Overzicht</a>
         </li>
         <li>
-            <a href="{{ route('beschikbareVoertuigen.index ') }}">Voertuigen Overzicht</a>
+            <a href="{{ route('beschikbareVoertuigen.index') }}">Voertuigen Overzicht</a>
 
         </li>
     </ul>
