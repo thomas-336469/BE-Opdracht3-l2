@@ -14,13 +14,13 @@
             <a href="{{ route('instructeurs')}}">Instructeurs Overzicht</a>
         </li>
         <li>
-            <a href="{{route('overzicht-voertuigen')}}">Voertuigen Overzicht</a>
+            <a href="{{route('overzicht-voertuigen')}}">Beschikbare Voertuigen </a>
         </li>
         <li>
             <a href="{{route('overzicht-examens')}}">Examen Overzicht</a>
         </li>
         <li>
-            <a href="{{ route('beschikbareVoertuigen.index') }}">Beschikbare Voertuigen</a>
+            <a href="{{ route('beschikbareVoertuigen.index') }}">Voertuigen Overzicht</a>
 
         </li>
     </ul>
